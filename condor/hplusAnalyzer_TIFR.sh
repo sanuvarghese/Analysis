@@ -21,13 +21,14 @@ date
 #//////////// T3 /////////////////////////////////
 echo "CONDOR DIR: $_CONDOR_SCRATCH_DIR"
 cd ${_CONDOR_SCRATCH_DIR}
-cp -r /home/rverma/t3store3/AN-18-061/Analyze2016Data/CMSSW_8_0_25/ .
+#cp -r /home/rverma/t3store3/AN-18-061/Analyze2016Data/CMSSW_8_0_25/ 
+cp -r /home/savarghe/newtest/CMSSW_8_0_28/src/HplusTMVA/13TeV/
 
 #------------------------------------------------
 #copy the lxplus package to the remote machine
 #and run the codes at remote machine
 #------------------------------------------------
-cd CMSSW_8_0_25/src/Analysis/
+cd CMSSW_8_0_28/src/HplusTMVA/
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 eval `scram runtime -sh`
 ./runMe.sh $inNtupleFile $outAnalFile $outAnalDir
@@ -38,13 +39,15 @@ eval `scram runtime -sh`
 #Remove the package, after copying the output
 #------------------------------------------------
 echo "OUTPUT: "
-ls ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_25/src/Analysis/13TeV/$outAnalDir
+ls ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_28/src/HplusTMVA/13TeV/$outAnalDir
 
-cp -rf ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_25/src/Analysis/13TeV/$outAnalDir/* /home/rverma/t3store3/AN-18-061/CondorOut/AnalysisCondorOut/AllCondorOut
+#cp -rf ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_25/src/Analysis/13TeV/$outAnalDir/* /home/rverma/t3store3/AN-18-061/CondorOut/AnalysisCondorOut/AllCondorOut
+cp -rf ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_28/src/HplusTMVA/13TeV/$outAnalDir/* /home/savarghe/newtest/CMSSW_8_0_28/src/HplusTMVA/13T\
+eV/
 
 #xrdcp -f -R ${_CONDOR_SCRATCH_DIR}/CMSSW_8_0_25/src/Analysis/13TeV/$outAnalDir root://se01.indiacms.res.in:1094//cms/store/user/rverma/histo_MuMC_MuData_20170608_TIFR/
 cd ${_CONDOR_SCRATCH_DIR}
-rm -rf CMSSW_8_0_25
+rm -rf CMSSW_8_0_28
 
 #/////////// LXPLUS ///////////////////////
 #cd /afs/cern.ch/work/r/rverma/private/analysis/CMSSW_7_2_3/src
